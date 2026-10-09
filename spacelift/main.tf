@@ -144,7 +144,7 @@ resource "spacelift_environment_variable" "context_secret" {
 }
 
 resource "spacelift_context_attachment" "secrets" {
-  for_each = { for key, stack in local.stacks : key => stack if stack.context }
+  for_each = toset([for key, stack in local.stacks : key if stack.context])
 
   context_id = spacelift_context.secrets.id
   stack_id   = spacelift_stack.test_case[each.key].id
@@ -153,7 +153,7 @@ resource "spacelift_context_attachment" "secrets" {
 # One run per stack. It fires once, at create, after the stack has its
 # environment.
 resource "spacelift_run" "first" {
-  for_each = var.trigger_runs ? local.stacks : {}
+  for_each = var.trigger_runs ? toset(keys(local.stacks)) : toset([])
 
   stack_id = spacelift_stack.test_case[each.key].id
 

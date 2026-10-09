@@ -29,6 +29,9 @@ masking, not real infrastructure. `terraform_data` is the only resource.
 3. Add a row to the tables in `README.md`.
 4. Run `tofu fmt -recursive -check`, then `tofu init` and `tofu apply` in the
    case. Delete `.terraform/`, the lock file and the state afterwards.
+5. Run `tofu plan` in `spacelift/`. `tofu validate` does not catch a
+   `for_each` over `local.stacks`: the entries have different object types,
+   so a `for_each` must take a set of keys.
 
 ## The `spacelift/` directory
 
