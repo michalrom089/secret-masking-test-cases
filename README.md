@@ -49,9 +49,9 @@ worker masks none of them.
 ## The stacks
 
 `spacelift/` is not a test case. It creates the space
-`secret-masking-test-cases`, one stack per case named `sm-<case>`, the
-`sm-secrets` context and the environment variables. It starts one run per
-stack.
+`secret-masking-test-cases`, one stack per case named `secret-masking-<case>`,
+the `secret-masking-secrets` context and the environment variables. It starts
+one run per stack.
 
 ## Getting started
 
@@ -64,7 +64,7 @@ vendor, so your account needs no VCS integration.
 ```bash
 spacectl api --variables '{
   "input": {
-    "name": "sm-bootstrap",
+    "name": "secret-masking-bootstrap",
     "description": "Creates the secret masking test case space and stacks.",
     "provider": "GIT",
     "repository": "secret-masking-test-cases",
@@ -95,7 +95,7 @@ ROLE_ID=$(spacectl api '{ roles { id slug } }' --raw \
 
 spacectl api --variables "{
   \"input\": {
-    \"stackID\": \"sm-bootstrap\",
+    \"stackID\": \"secret-masking-bootstrap\",
     \"roleID\": \"$ROLE_ID\",
     \"spaceID\": \"root\"
   }
@@ -107,14 +107,14 @@ spacectl api --variables "{
 **3. Run it.**
 
 ```bash
-spacectl stack deploy --id sm-bootstrap
+spacectl stack deploy --id secret-masking-bootstrap
 ```
 
 To run the cases again later:
 
 ```bash
 for c in env-secrets add-mask well-known-patterns tofu-sensitive error-message; do
-  spacectl stack deploy --id "sm-$c"
+  spacectl stack deploy --id "secret-masking-$c"
 done
 ```
 

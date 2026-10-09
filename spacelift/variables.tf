@@ -43,7 +43,7 @@ variable "trigger_runs" {
 variable "name_prefix" {
   type        = string
   description = "Prefix for the stack names. A second copy of the set in the same account also needs a different parent_space_id, because the space name is fixed."
-  default     = "sm"
+  default     = "secret-masking"
 }
 
 # The marker values. They are fake, and they must stay unique, so that a search
