@@ -1,19 +1,7 @@
 variable "repository" {
   type        = string
-  description = "Name of the GitHub repository that holds the test cases."
+  description = "Name of the GitHub repository that holds the test cases. The stacks read it through the managed GitHub integration."
   default     = "secret-masking-test-cases"
-}
-
-variable "git_url" {
-  type        = string
-  description = "HTTPS URL of the repository. The stacks read it through the raw Git vendor, so the account needs no VCS integration."
-  default     = "https://github.com/michalrom089/secret-masking-test-cases.git"
-}
-
-variable "git_namespace" {
-  type        = string
-  description = "Namespace the raw Git vendor shows next to the repository name. Cosmetic only."
-  default     = "michalrom089"
 }
 
 variable "branch" {

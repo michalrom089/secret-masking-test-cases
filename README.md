@@ -58,17 +58,17 @@ one run per stack.
 This creates one bootstrap stack. The bootstrap stack creates the rest. The
 commands need spacectl v1.20.0 or later and a spacectl profile.
 
-**1. Create the bootstrap stack.** It reads this repository over the raw Git
-vendor, so your account needs no VCS integration.
+**1. Create the bootstrap stack.** It reads this repository through the
+managed GitHub integration. The GitHub app installation must cover this
+repository.
 
 ```bash
 spacectl api --variables '{
   "input": {
     "name": "secret-masking-bootstrap",
     "description": "Creates the secret masking test case space and stacks.",
-    "provider": "GIT",
+    "provider": "GITHUB",
     "repository": "secret-masking-test-cases",
-    "repositoryURL": "https://github.com/michalrom089/secret-masking-test-cases.git",
     "namespace": "michalrom089",
     "branch": "main",
     "projectRoot": "spacelift",

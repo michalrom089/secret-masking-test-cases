@@ -90,15 +90,11 @@ resource "spacelift_stack" "test_case" {
   name        = "${var.name_prefix}-${each.key}"
   description = each.value.description
 
+  # No VCS block. The stack uses the managed GitHub integration, and the
+  # backend takes the namespace from the GitHub app installation.
   repository   = var.repository
   branch       = var.branch
   project_root = each.key
-
-  # The raw Git vendor reads a public repository over HTTPS. No VCS integration.
-  raw_git {
-    namespace = var.git_namespace
-    url       = var.git_url
-  }
 
   # A native OpenTofu stack. The worker uploads JSON logs and spans only for it.
   opentofu {
