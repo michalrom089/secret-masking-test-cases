@@ -4,6 +4,7 @@
 # plain            are plain environment variables on the stack.
 # context          attaches the context that holds TF_VAR_context_secret.
 # before_init      are hooks the stack runs before init.
+# after_apply      are hooks the stack runs after apply.
 # well_known_masks turns on enable_well_known_secret_masking.
 #
 # stack_defaults holds the value of every field an entry omits.
@@ -23,6 +24,9 @@ locals {
       }
       context     = true
       before_init = [local.echo_hook]
+      # Prints the outputs JSON-encoded, so the values reach the run logs
+      # with < > & escaped as \u003c \u003e \u0026.
+      after_apply = ["tofu output -json"]
     }
     "add-mask" = {
       description = "A hook marks a value secret with the ::add-mask runtime command."
@@ -49,6 +53,7 @@ locals {
     plain            = {}
     context          = false
     before_init      = null
+    after_apply      = null
     well_known_masks = false
   }
 
@@ -101,6 +106,7 @@ resource "spacelift_stack" "test_case" {
   }
 
   before_init                      = each.value.before_init
+  after_apply                      = each.value.after_apply
   enable_well_known_secret_masking = each.value.well_known_masks
 
   space_id   = spacelift_space.test_cases.id
