@@ -29,9 +29,9 @@ resource "terraform_data" "input" {
 # The multiline key is left out, because a resource key cannot hold a newline
 # that the span name keeps.
 resource "terraform_data" "keyed" {
-  for_each = { for name, value in local.values : name => value if name != "private_key_multiline" }
+  for_each = toset([for name, value in local.values : value if name != "private_key_multiline"])
 
-  input            = each.value
+  input            = each.key
   triggers_replace = timestamp()
 }
 
