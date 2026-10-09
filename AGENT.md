@@ -42,7 +42,8 @@ with the `spacelift-io/spacelift` provider. A bootstrap stack applies it.
 Spacelift account. `tofu init` and `tofu validate` are safe.
 
 Keep the `opentofu` block on the stack resource. The worker uploads JSON logs
-and spans only for a native OpenTofu stack.
+and spans only for a native OpenTofu stack. JSON logs also need OpenTofu 1.12.0
+or later, so keep `tofu_version` at 1.12.0 or later.
 
 ## Writing style
 

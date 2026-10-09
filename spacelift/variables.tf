@@ -31,7 +31,7 @@ variable "parent_space_id" {
 variable "tofu_version" {
   type        = string
   description = "OpenTofu version the stacks run."
-  default     = "1.10.6"
+  default     = "1.12.0"
 }
 
 variable "trigger_runs" {
